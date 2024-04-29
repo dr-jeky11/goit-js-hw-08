@@ -64,3 +64,18 @@ const images = [
   },
 ];
 
+const galleryList = document.querySelector("ul");
+const imageMarkUp = images.map(image => {
+  const listItem = document.createElement("li");
+  listItem.classList.add("gallery-item");
+  galleryList.append(listItem);
+  const listLink = document.createElement("a");
+  listLink.classList.add("gallery-link");
+  listLink.href = image.original;
+  listItem.append(listLink);
+  const imgEl = document.createElement("img");
+  imgEl.classList.add("gallery-image");
+  imgEl.src = image.preview;
+  imgEl.alt = image.description;
+  listItem.append(imgEl);
+})
