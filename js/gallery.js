@@ -65,11 +65,11 @@ const images = [
 ];
 
 const galleryList = document.querySelector(".gallery");
-const galleryLink = document.querySelector(".gallery-link");
 
-const createMarkUp = images.map(image => {
-  const { preview, original, description } = image;
-  return `<li class="gallery-item">
+const createMarkUp = images
+  .map(image => {
+    const { preview, original, description } = image;
+    return `<li class="gallery-item">
     <a class="gallery-link" href="${original}">
       <img
         class="gallery-image"
@@ -79,20 +79,23 @@ const createMarkUp = images.map(image => {
       />
     </a>
   </li>
-`}).join("")
+`}).join("");
 
 galleryList.insertAdjacentHTML("beforeend", createMarkUp)
 
-galleryLink.addEventListener("click", event => event.preventDefault());
-
 const imageClick = event => {
-  if (event.target.nodeName !== "img") {
-        return;
-  }
-  const imgSrc = event.target.dataset.source;
-  const instance = basicLightbox.create(
-    `<img class="original-img" src="${imgSrc}"`
-  );
+  event.preventDefault();
 
-  instance.show();
+  if (event.target.nodeName !== "IMG") return;
+
+  else if (event.target.nodeName === "IMG") {
+    const imgSrc = event.target.dataset.source;
+    const instance = basicLightbox.create(
+      `<img class="original-img" src="${imgSrc}"`
+    );
+    instance.show();
   }
+  console.log(event.target.dataset.source)
+}
+  
+galleryList.addEventListener("click", imageClick);

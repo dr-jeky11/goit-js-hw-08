@@ -5,9 +5,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  position: relative;
 }
 
-.gallery img {
+.gallery-image {
   width: 360px;
   height: 200px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-image:hover,
+.gallery-image:focus {
+  transform: scale(1.04);
 }
