@@ -64,18 +64,35 @@ const images = [
   },
 ];
 
-const galleryList = document.querySelector("ul");
-const imageMarkUp = images.map(image => {
-  const listItem = document.createElement("li");
-  listItem.classList.add("gallery-item");
-  galleryList.append(listItem);
-  const listLink = document.createElement("a");
-  listLink.classList.add("gallery-link");
-  listLink.href = image.original;
-  listItem.append(listLink);
-  const imgEl = document.createElement("img");
-  imgEl.classList.add("gallery-image");
-  imgEl.src = image.preview;
-  imgEl.alt = image.description;
-  listItem.append(imgEl);
-})
+const galleryList = document.querySelector(".gallery");
+const galleryLink = document.querySelector(".gallery-link");
+
+const createMarkUp = images.map(image => {
+  const { preview, original, description } = image;
+  return `<li class="gallery-item">
+    <a class="gallery-link" href="${original}">
+      <img
+        class="gallery-image"
+        src="${preview}"
+        data-source="${original}"
+        alt="${description}"
+      />
+    </a>
+  </li>
+`}).join("")
+
+galleryList.insertAdjacentHTML("beforeend", createMarkUp)
+
+galleryLink.addEventListener("click", event => event.preventDefault());
+
+const imageClick = event => {
+  if (event.target.nodeName !== "img") {
+        return;
+  }
+  const imgSrc = event.target.dataset.source;
+  const instance = basicLightbox.create(
+    `<img class="original-img" src="${imgSrc}"`
+  );
+
+  instance.show();
+  }
