@@ -1,11 +1,10 @@
 .gallery {
-  padding: 24px 156px;
+  padding: 24px 148px;
   max-width: 1128px;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  position: relative;
 }
 
 .gallery-image {

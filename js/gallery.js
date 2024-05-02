@@ -91,7 +91,7 @@ const imageClick = event => {
   else if (event.target.nodeName === "IMG") {
     const imgSrc = event.target.dataset.source;
     const instance = basicLightbox.create(
-      `<img class="original-img" src="${imgSrc}"`
+      `<img class="original-img" src=${imgSrc}>`
     );
     instance.show();
   }
